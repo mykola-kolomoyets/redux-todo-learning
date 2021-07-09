@@ -1,9 +1,5 @@
 const initialState = {
-	todos: [
-		{id: 0, text: "learn React", completed: true},
-		{id: 1, text: "learn Redux", completed: false, color: "purple"},
-		{id: 2, text: "Build the app", completed: false, color: "blue"},
-	],
+	todos: [],
 };
 
 const nextTodoId = (todos) => {
