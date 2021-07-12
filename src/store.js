@@ -1,6 +1,8 @@
-import { createStore, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducer';
-import { sayHiOnDispatch, includeMeaningOfLife } from './exampleAddons/enhancers';
+// import { sayHiOnDispatch, includeMeaningOfLife } from './exampleAddons/enhancers';
+import {myMiddleware} from './exampleAddons/middleware';
+import {composeWithDevTools} from 'redux-devtools-extension';
 
 // let preloadedState;
 // const persistedTodoString = localStorage.getItem('todos');
@@ -11,8 +13,12 @@ import { sayHiOnDispatch, includeMeaningOfLife } from './exampleAddons/enhancers
 // 	}
 // }
 
-const composedEnhancer = compose(sayHiOnDispatch, includeMeaningOfLife)
+// const composedEnhancer = compose(sayHiOnDispatch, includeMeaningOfLife)
 
-const store = createStore(rootReducer, undefined, composedEnhancer);
+const middlewareEnhancer  = composeWithDevTools(
+	applyMiddleware(myMiddleware)
+)
+
+const store = createStore(rootReducer, middlewareEnhancer);
 
 export default store;
